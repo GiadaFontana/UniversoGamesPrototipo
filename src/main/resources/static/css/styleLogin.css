@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+body {
+    background-image: url("wall.jpg");
+}
+
+  .a {
+    text-decoration: none;
+    font-family: 'Bungee Shade', cursive;
+    color: bisque;
+    font-size: 50px;
+  }
+
+
+  .b {
+    text-decoration: none;
+    font-family: 'Gugi', cursive;
+    color: bisque;
+    font-size: 30px;
+  }
+  
+  .c {
+    text-decoration: none;
+    font-family: 'Gugi', cursive;
+    color: bisque;
+    font-size: 20px;
+  }
