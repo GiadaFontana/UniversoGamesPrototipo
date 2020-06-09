@@ -5,6 +5,7 @@ import org.generation.italy.universoGames.util.IMappable;
 public class News implements IMappable {
 	private int id;
 	private String titolo;
+	
 	private String categoria;
 	private String contenuto;
 	private String dataPubblicazione;
