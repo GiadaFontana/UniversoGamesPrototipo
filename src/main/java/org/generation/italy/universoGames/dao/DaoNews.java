@@ -14,6 +14,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DaoNews extends BasicDao implements IDaoNews {
 
+	private static final String WHERE_ID = "WHERE id = ?;";
+	private static final String DELETE_FROM_NEWS = "DELETE FROM news ";
+	private static final String INSERT_INTO_NEWS_ = "INSERT INTO news(titolo, categoria, contenuto, datapubblicazione, autore) VALUES(?,?,?,?,?);";
+	private static final String SELECT_FROM_NEWS_WHERE_ID = "SELECT * FROM news WHERE id = ?;";
 	private static final String SELECT_FROM_NEWS = "SELECT * FROM news;";
 
 	public DaoNews  (@Value("${db.address}") String dbAddress, 
@@ -40,19 +44,19 @@ public class DaoNews extends BasicDao implements IDaoNews {
 	@Override
 	public News n(int id) {
 		return IMappable.fromMap(News.class,
-				getOne("SELECT * FROM news WHERE id = ?;", id));
+				getOne(SELECT_FROM_NEWS_WHERE_ID, id));
 	}
 
 	@Override
 	public void aggiungi(News n) {
-		execute("INSERT INTO news(titolo, categoria, contenuto, datapubblicazione, autore) VALUES(?,?,?,?,?);", 
+		execute(INSERT_INTO_NEWS_, 
 				n.getTitolo(), n.getCategoria(), n.getContenuto(), n.getDataPubblicazione(), n.getAutore());
 	}
 
 	@Override
 	public void elimina(int id) {
-		execute("DELETE FROM news " + 
-				"WHERE id = ?;", id);
+		execute(DELETE_FROM_NEWS + 
+				WHERE_ID, id);
 	}
 
 	@Override
