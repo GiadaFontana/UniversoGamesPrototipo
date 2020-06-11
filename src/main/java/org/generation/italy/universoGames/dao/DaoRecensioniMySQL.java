@@ -16,10 +16,10 @@ public class DaoRecensioniMySQL extends BasicDao implements IDaoRecensioni {
 
 	private static final String RECENSIONI_SELECT = "SELECT * FROM recensioni;";
 	private static final String RECENSIONI_SELECT_ID = "SELECT * FROM recensioni WHERE id = ?;";
-	private static final String RECENSIONI_ADD = "INSERT INTO recensioni (titoloVideogioco, dataRecensione, recensione, "
+	private static final String RECENSIONI_ADD = "INSERT INTO recensioni (titolovideogioco, datarecensione, recensione, "
 								+ "punteggio, recensore) VALUES (?,?,?,?,?);";
 	private static final String RECENSIONI_DELETE = "DELETE FROM recensioni WHERE id = ?;";
-	private static final String RECENSIONI_UPDATE = "UPDATE recensioni SET titoloVideogioco = ?, dataRecensione = ?,"
+	private static final String RECENSIONI_UPDATE = "UPDATE recensioni SET titolovideogioco = ?, datarecensione = ?,"
 							+ " recensione = ?, punteggio = ?, recensore = ? WHERE id = ?;";
 
 	public DaoRecensioniMySQL(

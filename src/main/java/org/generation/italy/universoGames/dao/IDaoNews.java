@@ -14,7 +14,7 @@ public interface IDaoNews {
 
 	void elimina(int id);
 
-	void modifica(News n, int id);
+	void modifica(News n);
 }
 
 

@@ -60,9 +60,9 @@ public class DaoNews extends BasicDao implements IDaoNews {
 	}
 
 	@Override
-	public void modifica(News n, int id) {
+	public void modifica(News n) {
 		execute("UPDATE news SET titolo = ?, categoria = ?, contenuto = ?, datapubblicazione = ?, autore = ? WHERE id = ?;",
-				n.getTitolo(), n.getCategoria(), n.getContenuto(), n.getDataPubblicazione(), n.getAutore(), id);		
+				n.getTitolo(), n.getCategoria(), n.getContenuto(), n.getDataPubblicazione(), n.getAutore(), n.getId());		
 	}
 	
 

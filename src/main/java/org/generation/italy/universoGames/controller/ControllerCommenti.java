@@ -40,9 +40,9 @@ public class ControllerCommenti {
 		dao.elimina(id);
 	}
 	
-	@PutMapping("/{id}")
-	public void modifica(@RequestBody Commento c, @PathVariable int id) {
-		dao.modifica(c, id);
+	@PutMapping()
+	public void modifica(@RequestBody Commento c) {
+		dao.modifica(c);
 	
 	}
 	

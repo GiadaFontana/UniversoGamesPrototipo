@@ -13,36 +13,47 @@ $(document).ready(function() {
 						<td>
 							<button class='detail-button' data-id='${res[i].id}'>Dettaglio</button>
 							<button class='delete-button' data-id='${res[i].id}'>Delete</button>
+							<button class="open-edit-news" data-id="${res[i].id}">Modifica</button>
+						</td>
 
 						</td>
 					</tr>`)
-					.appendTo("#lista-news");
+					.hide()
+					.appendTo("#lista-news")
+				    .fadeIn(i*500);
 			}
 		})
 	}
 	
 	getNews()
 	
+	let newsId= -1
+	
 		$('#lista-news').on('click', '.detail-button', function() {
-		console.log('ciao')
 		const id = $(this).attr('data-id')
+		newsId=id
 		$('#detail-news-modal').css('display', 'block')
-		getRecensione(id)
+		getNewss(id)
 	})
 	
-	function getRecensione(id) {
+	function getNewss(id){
+		idNews=
 		$.get(`news/${id}`,function(res) {
 			$(`<p><strong>Titolo: </strong>${res.titolo}</p>
 			<p><strong>categoria: </strong>${res.categoria}</p>
 				<p><strong>data di pubblicazione: </strong>${res.dataPubblicazione}</p>
 				<p><strong>autore: </strong>${res.autore}</p>`
+					
+					
 			).appendTo("#new-detail")
 		})
+		
 	}
 	
 	$("#close-detail").on("click", function() {
 		$("#detail-news-modal").css('display','none')
 		$("#new-detail").html('')
+		newsId=-1;
 	})
 	
 	$('#lista-news').on('click', '.delete-button', function() {
@@ -61,7 +72,6 @@ $(document).ready(function() {
 	}
 
 	$('#open-add-news').click(function () {
-		console.log('porcaputtana')
 		$('#add-news-modal').show('slow')
 		
 	})
@@ -101,23 +111,37 @@ $(document).ready(function() {
     $("#close-add-news").on("click", function() {
 		$("#add-news-modal").hide('slow')
 	})
+	 
+	let editMode=false;
+    let editId=-1;
     
 	    $('#add-news').click(function() {
 		const n = {
 				titolo: $('#titolo').val(), 
 				categoria: $('#categoria').val(),
 				contenuto: $('#contenuto').val(), 
-				datapubblicazione: $('#datapubblicazione').val(), 
+				datapubblicazione: $('#dataPubblicazione').val(), 
 				autore: $('#autore').val()
 				
 		}
+		if(editMode){
+			n.id=editId;
+			editNews(n)
+			editMode = false
+			idDaModificare = -1
+		    $('#add-news').text('Aggiungi')
+			$('#add-news-modal-title').text('AGGIUNGI NEWS')
+			
+		}
+		else{
+			addNews(n);
+		}
 		
-		addNews(n)
 
         $('#titolo').val('')
         $('#categoria').val('')
         $('#contenuto').val('')
-        $('#datapubblicazione').val('')
+        $('#dataPubblicazione').val('')
         $('#autore').val('')
         $('#lista-news').html('')
          getNews()
@@ -138,4 +162,42 @@ $(document).ready(function() {
 			}
 	    })
      }
+	    $('#lista-news').on('click', '.open-edit-news', function() {
+			editMode = true;
+			
+			const id = $(this).attr('data-id')
+			
+			editId = id;
+			
+			$.get(`news/${id}`, function(res) {
+				$('#titolo').val(res.titolo)
+				$('#categoria').val(res.categoria)
+				$('#contenuto').val(res.contenuto)
+				$('#dataPubblicazione').val(res.dataPubblicazione)
+				$('#autore').val(res.autore)
+				$('#add-news').text('Modifica')
+				$('#add-news-modal-title').text('MODIFICA NEWS')
+			})
+			$('#add-news-modal').css('display', 'block')
+		})
+		
+		function editNews(n) {
+	    	
+			$.ajax({
+				url: `/news`,
+				type:'PUT',
+				data: JSON.stringify(n),
+				contentType: "application/json",
+			    dataType: 'json',
+				success: function(res) {
+					
+				
+			    }
+			})
+		}
+	    
 })
+ 
+    
+    
+

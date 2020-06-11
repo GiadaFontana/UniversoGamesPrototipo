@@ -8,21 +8,30 @@ $(document).ready(function() {
 						<td>
 							<button class='detail-button' data-id='${res[i].id}'>Dettaglio</button>
 							<button class='delete-button' data-id='${res[i].id}'>Delete</button>
+							<button class='open-edit-recensioni' data-id="${res[i].id}">Modifica</button>
 						</td>
 					</tr>`)
+					.hide()
 					.appendTo("#lista-recensioni")
+					.fadeIn(i*500);
 			}
 		})
 	}
 	getRecensioni() 
+	
+	let recensioniId= -1
+	
 	$('#lista-recensioni').on('click', '.detail-button', function() {
-		console.log('ciao')
+
 		const id = $(this).attr('data-id')
+		recensioniId=id
 		$('#detail-recensione-modal').css('display', 'block')
+		
 		getRecensione(id)
 	})
 	
 	function getRecensione(id) {
+		idRecensione=
 		$.get(`recensioni/${id}`,function(res) {
 			$(`<p><strong>TitoloVideogioco: </strong>${res.titoloVideogioco}</p>
 				<p><strong>dataRecensione: </strong>${res.dataRecensione}</p>
@@ -32,9 +41,11 @@ $(document).ready(function() {
 			).appendTo("#recension-detail")
 		})
 	}
+	
 	$("#close-detail").on("click", function() {
-		$("#detail-recensione-modal").css('display','none')
+		$("#detail-recensione-modal").hide('slow')
 		$("#recension-detail").html('')
+		recensioniId=-1;
 	})
 	$('#lista-recensioni').on('click', '.delete-button', function() {
 		const id = $(this).attr('data-id')
@@ -51,7 +62,6 @@ $(document).ready(function() {
 	}
 
 	$('#open-add-recensioni').click(function () {
-		console.log('boh')
 		$('#add-recensioni-modal').show('slow')
 		
 	})
@@ -61,6 +71,9 @@ $(document).ready(function() {
     $("#close-add-recensioni").on("click", function() {
 		$("#add-recensioni-modal").hide('slow')
 	})
+	
+	let editMode=false;
+    let editId=-1;
     
 	    $('#add-recensioni').click(function() {
 		const r = {
@@ -72,7 +85,18 @@ $(document).ready(function() {
 				
 		}
 		
-		addRecensioni(r)
+		if(editMode){
+			r.id=editId;
+			editRecensioni(r)
+			editMode = false
+			idDaModificare = -1
+		    $('#add-recensioni').text('Aggiungi')
+			$('#add-recensioni-modal-title').text('AGGIUNGI RECENSIONE')
+					
+		}
+		else{
+			addRecensioni(r);
+		}
 
         $('#titoloVideogioco').val('')
         $('#dataRecensione').val('')
@@ -98,5 +122,37 @@ $(document).ready(function() {
 			}
 	    })
      }
+	    
+	    $('#lista-recensioni').on('click', '.open-edit-recensioni', function() {
+			editMode = true;
+			
+			const id = $(this).attr('data-id')
+			
+			editId = id;
+			
+			$.get(`recensioni/${id}`, function(res) {
+				$('#titoloVideogioco').val(res.titoloVideogioco)
+				$('#dataRecensione').val(res.dataRecensione)
+				$('#recensione').val(res.recensione)
+				$('#punteggio').val(res.punteggio)
+				$('#recensore').val(res.recensore)
+				$('#add-recensioni').text('Modifica')
+				$('#add-recensioni-modal-title').text('MODIFICA RECENSIONI')
+			})
+			$('#add-recensioni-modal').css('display', 'block')
+		})
+		
+		function editRecensioni(r) {
+			$.ajax({
+				url: `/recensioni`,
+				type:'PUT',
+				data: JSON.stringify(r),
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(res) {
+					
+				}
+			})
+		}
 
 })

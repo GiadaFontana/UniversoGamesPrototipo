@@ -11,6 +11,6 @@ public List<Commento>commenti();
 public Commento c(int id);
 public void aggiungi(Commento c);
 public void elimina(int id);
-public void modifica(Commento n, int id);
+public void modifica(Commento n);
 
 }

@@ -61,10 +61,11 @@ List<Commento>ris = new ArrayList<>();
 	}
 
 	@Override
-	public void modifica(Commento n, int id) {
+	public void modifica(Commento n) {
 		execute(UPDATE_COMMENTI, 
 				n.getCommento(),
-				n.getIdUtente()
+				n.getIdUtente(),
+				n.getId()
 				);
 	
 		

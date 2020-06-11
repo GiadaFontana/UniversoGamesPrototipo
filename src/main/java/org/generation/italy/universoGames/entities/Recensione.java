@@ -76,6 +76,12 @@ public class Recensione implements IMappable {
 	public void setRecensore(String recensore) {
 		this.recensore = recensore;
 	}
+
+	@Override
+	public String toString() {
+		return "Recensione [id=" + id + ", titoloVideogioco=" + titoloVideogioco + ", dataRecensione=" + dataRecensione
+				+ ", recensione=" + recensione + ", punteggio=" + punteggio + ", recensore=" + recensore + "]";
+	}
 	
 	
 }

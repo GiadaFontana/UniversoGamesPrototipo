@@ -40,9 +40,9 @@ public class ControllerNews {
 		dao.elimina(id);
 	}
 	
-	@PutMapping("/{id}")
-	public void modifica(@RequestBody News n, @PathVariable int id) {
-		dao.modifica(n, id);
+	@PutMapping
+	public void modifica(@RequestBody News n) {
+		dao.modifica(n);
 	}
 	
 }
