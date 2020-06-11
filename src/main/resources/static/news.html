@@ -3,8 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>news</title>
-<script src="./jquery-3.5.1.min.js"></script>
-<script src="./mainnews.js"></script>
+<script src="./js/jquery-3.5.1.min.js"></script>
+<script src="./js./mainnews.js"></script>
 <link rel="stylesheet" href="./css/styleNews.css">
 <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
@@ -14,15 +14,15 @@
 <body>
 	<h1><a href="homepage.html" class="a">UniversoGames</a></h1>
 	<h2 class="b">News</h2>
-	<table>
+	<button id="open-add-news" class="d">Aggiungi News</button>
+	<table>  
 		<thead style="width: 90%; margin: auto;">
-			<tr>
-				<th class="c">LISTA NEWS</th>
-			</tr>
+			<tr><th class="c">LISTA NEWS</th></tr> 
 			
 		</thead>
-		<tbody class="c" id="lista_news"></tbody>
+		<tbody class="c" id="lista-news"></tbody>
 		</table>
+		
 	<div class="modal" id="detail-news-modal">
 		<div class="modal-content">
 			<span class="close" id="close-detail">&times;</span>
@@ -31,9 +31,36 @@
 			</div>
 		</div>
 	</div>	
-	
+	<div class="modal" id="add-news-modal">
+		<div class="modal-content">
+			<span class="close" id="close-add-news">&times;</span>
+			<h2 class="c">AGGIUNGI NEWS</h2>
+			<table>
+				<tr>
+					<td><strong class="c">Titolo:</strong></td>
+					<td><input type="text" id="titolo" required></td>
+				</tr>
+				<tr>
+					<td><strong class="c">Categoria:</strong></td>
+					<td><input type="text" id="categoria" required></td>
+				</tr><tr>
+					<td><strong class="c">Contenuto:</strong></td>
+					<td><textarea id="contenuto" rows="3" cols="20"></textarea></td>
+				</tr><tr>
+					<td><strong class="c">Data di pubblicazione:</strong></td>
+					<td><input type="date" id="dataPubblicazione" required></td>
+				</tr>
+				<tr>
+					<td><strong class="c">Autore:</strong></td>
+					<td><input type="text" id="autore"></td>
+				</tr>
+			</table>
+			<br><br>
+			<button id="add-news" class="d">Aggiungi</button>
+		</div>
+	</div>
 <nav>	
-<h1><a href="categorie.html" class="c">BACK</a></h1>
+<h1><a href="homepage.html" class="c">BACK</a></h1>
 <a href ="recensioni.html" class="c">Recensioni</a>
 <a href ="categorie.html" class="c">Categorie</a>
 </nav>

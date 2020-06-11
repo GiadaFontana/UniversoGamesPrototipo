@@ -3,8 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>categorie</title>
-<script src="./jquery-3.5.1.min.js"></script>
-<script src="./mainrecensioni.js"></script>
+<script src="./js/jquery-3.5.1.min.js"></script>
+<script src="./js/mainrecensioni.js"></script>
 <link rel="stylesheet" href="./css/styleRec.css">
 <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
@@ -12,6 +12,8 @@
 <body>
     <h1><a href="homepage.html" class="a">UniversoGames</a></h1>
 	<h2 class="b">Recensioni</h2>
+
+	<button id="open-add-recensioni" class="d">Aggiungi Recensioni</button>
 	
 			
 	<table>
@@ -21,7 +23,7 @@
 			</tr>
 			
 		</thead>
-		<tbody class="c" id="lista_recensioni"></tbody>
+		<tbody class="c" id="lista-recensioni"></tbody>
 	     </table>
 		
 	<div class="modal" id="detail-recensione-modal">
@@ -33,8 +35,37 @@
 		</div>
 	</div>
 
+	<div class="modal" id="add-recensioni-modal">
+		<div class="modal-content">
+			<span class="close" id="close-add-recensioni">&times;</span>
+			<h2 class="c">AGGIUNGI RECENSIONI</h2>
+			<table>
+				<tr>
+					<td><strong class="c">Titolo Videogioco:</strong></td>
+					<td><input type="text" id="titoloVideogioco" required></td>
+				</tr>
+				<tr>
+					<td><strong class="c">Data di recensione:</strong></td>
+					<td><input type="date" id="dataRecensione" required></td>
+				</tr><tr>
+					<td><strong class="c">Recensione:</strong></td>
+					<td><textarea id="recensione" rows="3" cols="20"></textarea></td>
+				</tr><tr>
+					<td><strong class="c">Punteggio:</strong></td>
+					<td><input type="number" id="punteggio" required></td>
+				</tr>
+				<tr>
+					<td><strong class="c">Recensore:</strong></td>
+					<td><input type="text" id="recensore"></td>
+				</tr>
+			</table>
+			<br><br>
+			<button id="add-recensioni" class="d">Aggiungi</button>
+		</div>
+	</div>
+
 	<nav>
-	<h2><a class="c" href="news.html">BACK</a></h2>
+	<h2><a class="c" href="homepage.html">BACK</a></h2>
         <a class="c" href="news.html">News</a>
         <a class="c" href ="categorie.html">Categorie</a>
     </nav>
