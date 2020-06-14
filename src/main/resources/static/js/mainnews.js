@@ -1,157 +1,129 @@
-$(document).ready(function() {
+$(document).ready(function(){
+
+	let modal = $('.modal');
+	let modalContent = $('.modal-content');
 	
-	function getNews() {
-		
+	$('#lista-news').on('click', '.detail', function(){
+		const id = +$(this).attr('data-id');
+		getNewss(id);
+		$('#my-modal').show('slow');
+	})
 	
-		$.get("news", function(res)
+	
+	$('#close-detail').click(function(){
+		$('#titolo-news').html('<b>Titolo: </b>');
+		$('#categoria-news').html('<b>Categoria: </b>');
+		$('#contenuto-news').html('<b>Contenuto: </b>');
+		$('#datapubblicazione-news').html('<b>Data di Pubblicazione: </b>');
+		$('#autore-news').html('<b>autore: </b>');
+		$('#my-modal').hide('slow');
+		$(this).parent().find('button').remove();
+	})
+	
+	$('.add-news-btn').click(function(){
+		let lastID = 0;
+		$.get('news', function(res){
+			for(let i = 0; i < res.length; i++){
+				lastID = res[i].id;
 				
-				{
-			  console.log(res);
-			for (let i = 0; i < res.length; i++) {
-				$(`<tr>
+			}
+			lastID = lastID + 1;
+			
+			$('#id-for-edit').append(lastID);
+		})
+		$('#my-modal-add').show('slow');
+	})
+	
+	$('#close-add-form').click(function(){
+		$('#my-modal-add').hide('slow');
+		$('#id-for-edit').html('<b>ID: </b>');
+	})
+		
+	$('.abort').click(function(){
+		$('#my-modal-add').hide('slow');
+		$('#id-for-edit').html('<b>ID: </b>');
+		$('input[NAME=\'titolo\']').val('');
+		$('input[NAME=\'categoria\']').val('');
+		$('input[NAME=\'contenuto\']').val('');
+		$('input[NAME=\'datapubblicazione\']').val('');
+		$('input[NAME=\'autore\']').val('');
+		
+	})
+	
+	
+	
+	function getNews(){
+		$.get("news", function(res){
+			for(let i = 0; i < res.length; i++) {
+				$(`<tr data-id=${res[i].id}>
 						<td>${res[i].titolo}</td>
 						<td>
-							<button class='detail-button' data-id='${res[i].id}'>Dettaglio</button>
-							<button class='delete-button' data-id='${res[i].id}'>Delete</button>
-							<button class="open-edit-news" data-id="${res[i].id}">Modifica</button>
-						</td>
-
+							<button class='detail' data-id='${res[i].id}'>Dettaglio</button>
 						</td>
 					</tr>`)
-					.hide()
-					.appendTo("#lista-news")
-				    .fadeIn(i*500);
+					.appendTo("#lista-news");
+				
 			}
 		})
 	}
 	
-	getNews()
-	
-	let newsId= -1
-	
-		$('#lista-news').on('click', '.detail-button', function() {
-		const id = $(this).attr('data-id')
-		newsId=id
-		$('#detail-news-modal').css('display', 'block')
-		getNewss(id)
-	})
+	getNews();
 	
 	function getNewss(id){
-		idNews=
-		$.get(`news/${id}`,function(res) {
-			$(`<p><strong>Titolo: </strong>${res.titolo}</p>
-			<p><strong>categoria: </strong>${res.categoria}</p>
-				<p><strong>data di pubblicazione: </strong>${res.dataPubblicazione}</p>
-				<p><strong>autore: </strong>${res.autore}</p>`
-					
-					
-			).appendTo("#new-detail")
-		})
-		
-	}
-	
-	$("#close-detail").on("click", function() {
-		$("#detail-news-modal").css('display','none')
-		$("#new-detail").html('')
-		newsId=-1;
-	})
-	
-	$('#lista-news').on('click', '.delete-button', function() {
-		const id = $(this).attr('data-id')
-		deleteNews(id, $(this).parent().parent())
-	})
-	
-	function deleteNews(id, htmlRow) {
-		$.ajax({
-			url: `news/${id}`,
-			type: 'DELETE',
-			success: function() {
-				htmlRow.remove()
-			}
+		$.get(`news/${id}`, function(res){
+			let id = res.id
+			let titolo = res.titolo;
+			let categoria = res.categoria;
+			let contenuto = res.contenuto;
+			let dataPubblicazione = res.dataPubblicazione;
+			let autore = res.autore;
+			
+			
+			$('#id-news').append(id);
+			$('#titolo-news').append(titolo);
+			$('#categoria-news').append(categoria);
+			$('#contenuto-news').append(contenuto);
+			$('#dataPubblicazione-news').append(dataPubblicazione);
+			$('#autore-news').append(autore);
+			$('#detail-content').append(`<button class='edit-news' data-id='${id}'>Modifica</button> 
+										<button class='delete-news' data-id='${id}'>Elimina</button>`)
 		})
 	}
-
-	$('#open-add-news').click(function () {
-		$('#add-news-modal').show('slow')
-		
-	})
-
-	const categorie = [];
-	function getCategorie() {
-        $.get('news', function (res) {
-            for (let i = 0; i < res.length; i++) {
-            categorie.push(res[i].categoria)
-            }
-        })
-    }
 	
-
-    const categorieCensite = []
-	function censisciCategorie(){
-        categorieCensite.splice(0, categorieCensite.length);
-        for (const categoria of categorie){
-            let esiste = false; 
-            if (categorieCensite.length == 0){
-                categorieCensite.push(categoria);
-            } else {
-                for (const categoria2 of categorieCensite){
-                    if (categoria === categoria2){ 
-                        esiste = true;
-                        break
-                     }
-                } if (!esiste){
-                    categorieCensite.push(categoria);
-                }    
-            }
-        }
-        console.log(categorieCensite);
-        
-	}
-    
-    $("#close-add-news").on("click", function() {
-		$("#add-news-modal").hide('slow')
-	})
-	 
 	let editMode=false;
     let editId=-1;
-    
-	    $('#add-news').click(function() {
+	$('.news-add-confirm').click(function(){
 		const n = {
-				titolo: $('#titolo').val(), 
-				categoria: $('#categoria').val(),
-				contenuto: $('#contenuto').val(), 
-				datapubblicazione: $('#dataPubblicazione').val(), 
-				autore: $('#autore').val()
-				
+				titolo: $('input[NAME=\'titolo\']').val(),
+				categoria: $('input[NAME=\'categoria\']').val(),
+				contenuto: $('input[NAME=\'contenuto\']').val(),
+				dataPubblicazione: $('input[NAME=\'datapubblicazione\']').val(),
+				classe: $('input[NAME=\'autore\']').val(),
 		}
-		if(editMode){
+		
+		if (editMode){
 			n.id=editId;
 			editNews(n)
 			editMode = false
 			idDaModificare = -1
-		    $('#add-news').text('Aggiungi')
-			$('#add-news-modal-title').text('AGGIUNGI NEWS')
-			
-		}
-		else{
+		}  
+		else {
 			addNews(n);
 		}
 		
-
-        $('#titolo').val('')
+		$('#titolo').val('')
         $('#categoria').val('')
         $('#contenuto').val('')
         $('#dataPubblicazione').val('')
         $('#autore').val('')
         $('#lista-news').html('')
          getNews()
-        $('#add-news-modal').hide('slow')
+         $('#my-modal-add').hide('slow')
        
-	   
-	  })
 		
-		
-		function addNews(n){
+	})
+	
+	function addNews(n){
 		$.ajax({
 			type: 'POST',
 			url: '/news',
@@ -162,42 +134,53 @@ $(document).ready(function() {
 			}
 	    })
      }
-	    $('#lista-news').on('click', '.open-edit-news', function() {
-			editMode = true;
-			
-			const id = $(this).attr('data-id')
-			
-			editId = id;
-			
-			$.get(`news/${id}`, function(res) {
-				$('#titolo').val(res.titolo)
-				$('#categoria').val(res.categoria)
-				$('#contenuto').val(res.contenuto)
-				$('#dataPubblicazione').val(res.dataPubblicazione)
-				$('#autore').val(res.autore)
-				$('#add-news').text('Modifica')
-				$('#add-news-modal-title').text('MODIFICA NEWS')
-			})
-			$('#add-news-modal').css('display', 'block')
-		})
-		
-		function editNews(n) {
-	    	
-			$.ajax({
-				url: `/news`,
-				type:'PUT',
-				data: JSON.stringify(n),
-				contentType: "application/json",
-			    dataType: 'json',
-				success: function(res) {
+	
+	
+	function editNews(n){
+		$.ajax({
+			url: `/news`,
+			type: 'PUT',
+			data: JSON.stringify(n),
+			success: function(res){
 					
 				
-			    }
-			})
-		}
-	    
-})
- 
-    
-    
+			}
+		})
+	}
 
+	function deleteNews(id, rowHtml){
+		$.ajax({
+			url: `news/${id}`,
+			type: 'DELETE',
+			success: function(){
+					rowHtml.remove();
+					
+				}
+			})
+		}	
+	
+	$('#detail-content').on('click', '.delete-news', function(){
+		const id = +$(this).attr('data-id');
+		deleteNews(id, $(this).parent().parent())
+	
+	})
+	
+
+
+	$('#detail-content').on('click', '.edit-news', function(){
+		let id = +$(this).attr('data-id');
+		editMode = true;
+	    editId=id;
+		$.get(`news/${id}`, function(res) {
+			$('#titolo').val(res.titolo)
+			$('#categoria').val(res.categoria)
+			$('#contenuto').val(res.contenuto)
+			$('#dataPubblicazione').val(res.dataPubblicazione)
+			$('#autore').val(res.autore)
+			
+		})
+		$('#my-modal-add').css('display', 'block');
+			
+	})
+	
+})

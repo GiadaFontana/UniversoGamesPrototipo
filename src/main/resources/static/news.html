@@ -14,49 +14,53 @@
 <body>
 	<h1><a href="homepage.html" class="a">UniversoGames</a></h1>
 	<h2 class="b">News</h2>
-	<button id="open-add-news" class="d">Aggiungi News</button>
-	<table>  
-		<thead style="width: 90%; margin: auto;">
-			<tr><th class="c">LISTA NEWS</th></tr> 
+<br>
+	<button class='add-news-btn'>Aggiungi</button>
+	<br>
+	<br>
+	<table>
+		<thead>
+			<th>Titoli Newa</th>
 			
 		</thead>
-		<tbody class="c" id="lista-news"></tbody>
-		</table>
-		
-	<div class="modal" id="detail-news-modal">
-		<div class="modal-content">
-			<span class="close" id="close-detail">&times;</span>
-			<h2 class="c">DETTAGLIO NEWS</h2>
-			<div class="c" id="new-detail">
+		<tbody id='lista-news'></tbody>
+	</table>
+	<div id='my-modal' class='modal'>
+		<div id='detail-content' class='modal-content'>
+			<span id='close-detail' class='close'>&times;</span>
+					<span id='titolo-news'><b>Titolo: </b></span><br>
+					<span id='categoria-news'><b>Categoria: </b></span><br>
+					<span id='contenuto-news'><b>Contenuto: </b></span><br>
+					<span id='datapubblicazione-news'><b>DataPubblicazione </b></span><br>
+					<span id='autore'><b>autore</b></span><br><br>
+				</div>
+				</div>
 			</div>
 		</div>
-	</div>	
-	<div class="modal" id="add-news-modal">
-		<div class="modal-content">
-			<span class="close" id="close-add-news">&times;</span>
-			<h2 id="add-news-modal-title" class="c" >AGGIUNGI NEWS</h2>
-			<table>
-				<tr>
-					<td><strong class="c">Titolo:</strong></td>
-					<td><input type="text" id="titolo" required></td>
-				</tr>
-				<tr>
-					<td><strong class="c">Categoria:</strong></td>
-					<td><input type="text" id="categoria" required></td>
-				</tr><tr>
-					<td><strong class="c">Contenuto:</strong></td>
-					<td><textarea id="contenuto" rows="3" cols="20"></textarea></td>
-				</tr><tr>
-					<td><strong class="c">Data di pubblicazione:</strong></td>
-					<td><input type="date" id="dataPubblicazione" required></td>
-				</tr>
-				<tr>
-					<td><strong class="c">Autore:</strong></td>
-					<td><input type="text" id="autore"></td>
-				</tr>
-			</table>
+	</div>
+	<div id='my-modal-add' class='modal'>
+		<div class='modal-content'>
+		<span id='close-add-form' class='close'>&times;</span>
+			<div class='add-form'>
+					<span><b>Titolo: </b><input type='text' name='titolo' placeholder='titolo' required></span><br>
+					<span><b>Categoria: </b><input	type='text' name='categoria' placeholder='categoria...' required></span><br>
+					<span><b>Contenuto: </b><input	type='text' name='contenuto' placeholder='contenuto...' required></span><br>
+					<span><b>dataPubblicazione: </b><input	type='date' name='dataPubblicazione' placeholder='dataPubblicazione'required></span><br>
+					<span><b>autore: </b><input	type='text' name='autore' placeholder='autore' required> 
+					
+			</div>
 			<br><br>
-			<button id="add-news" class="d">Aggiungi</button>
+		<button class='news-add-confirm'>Conferma</button> <button class='abort'>Annulla</button><!-- Questo bottone manca -->
+		</div>
+	</div>
+	<div id='confirm-form' class='modal'>
+		<div id='detail-content' class='modal-content'>
+			<span id='close-detail' class='close'>&times;</span>
+			<div class='confirm-question'>
+				<span>Sicuro di voler eliminare?</span>
+				<br><br>
+				<button id='confirm'>Conferma</button> <button id='cancel'>Anulla</button>
+			</div>
 		</div>
 	</div>
 <nav>	
