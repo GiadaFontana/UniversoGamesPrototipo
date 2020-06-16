@@ -6,69 +6,100 @@
 <script src="./js/jquery-3.5.1.min.js"></script>
 <script src="./js/mainrecensioni.js"></script>
 <link rel="stylesheet" href="./css/styleRec.css">
-<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet"> 
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Wallpoet&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <h1><a href="homepage.html" class="a">UniversoGames</a></h1>
+<p align=right><a href="login.html" class="c">login</a></p>
+ <p align=right><a href="logout.html" class="c">logout</a>a</p>
+  <h1><a href="homepage.html" class="a">UniversoGames</a></h1>
 	<h2 class="b">Recensioni</h2>
-
-	<button id="open-add-recensioni" class="d">Aggiungi Recensioni</button>
-	
-			
+<br>
+	<button class='add-recensione-btn'>Aggiungi</button>
+	<br>
+	<br>
 	<table>
-		<thead style="width: 90%; margin: auto;">
-			<tr>
-				<th class="c">LISTA RECENSIONI</th>
-			</tr>
-			
-		</thead>
-		<tbody class="c" id="lista-recensioni"></tbody>
-	     </table>
 		
-	<div class="modal" id="detail-recensione-modal">
-		<div class="modal-content">
-			<span class="close" id="close-detail">&times;</span>
-			<h2 class="c">DETTAGLIO RECENSIONE</h2>
-			<div class="c" id="recension-detail">
+		<tbody id='lista-recensioni'></tbody>
+	</table>
+	<div id='my-modal' class='modal'>
+		<div id='detail-content' class='modal-content'>
+			<span id='close-detail' class='close'>&times;</span>
+			<div class='detail-flex'>
+				<div class='flex-left'>
+					<span id='titoloVideogioco-recensione'><b>Titolo Videogioco: </b></span><br>
+					<span id='dataRecensione-recensione'><b>Data Recensione: </b></span><br>
+					<span id='recensione-recensione'><b>recensione: </b></span><br>
+					<span id='punteggio-recensione'><b>Punteggio: </b></span><br>
+					<span id='recensore-recensione'><b>Recensore: </b></span><br><br>
+							<div class='inside-modal-content' id='commenti-recensione'>
+			<h2 class="c">Commenti</h2>
+				<table>
+					<thead><tr><th>Utente</th><th>Commento</th></tr></thead>
+					<tbody id='tabella-commenti'></tbody>
+				</table>
+		</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="modal" id="add-recensioni-modal">
-		<div class="modal-content">
-			<span class="close" id="close-add-recensioni">&times;</span>
-			<h2 id="add-recensioni-modal-title" class="c">AGGIUNGI RECENSIONI</h2>
-			<table>
-				<tr>
-					<td><strong class="c">Titolo Videogioco:</strong></td>
-					<td><input type="text" id="titoloVideogioco" required></td>
-				</tr>
-				<tr>
-					<td><strong class="c">Data di recensione:</strong></td>
-					<td><input type="date" id="dataRecensione" required></td>
-				</tr><tr>
-					<td><strong class="c">Recensione:</strong></td>
-					<td><textarea id="recensione" rows="3" cols="20"></textarea></td>
-				</tr><tr>
-					<td><strong class="c">Punteggio:</strong></td>
-					<td><input type="number" id="punteggio" step="0.25" required ></td>
-				</tr>
-				<tr>
-					<td><strong class="c">Recensore:</strong></td>
-					<td><input type="text" id="recensore"></td>
-				</tr>
-			</table>
+	<div id='my-modal-add' class='modal'>
+		<div class='modal-content'>
+		<span id='close-add-form' class='close'>&times;</span>
+			<div class='add-form'>
+					<span><b>Titolo VideoGioco</b><input type='text' name='titoloVideogioco' placeholder='titolovideogioco' required></span><br>
+					<span><b>dataRecensione </b><input	type='date' name='dataRecensione' placeholder='data recensione' required></span><br>
+					<span><b>recensione </b><input	type='text' name='recensione' placeholder='recensione'required></span><br>
+					<span><b>punteggio </b><input	type='number' name='punteggio' placeholder='punteggio...' required></span><br>
+					<span><b>recensore </b><input	type='text' name='recensore' placeholder='recensore'required></span><br>
+					
+					
+					<div class='inside-modal-content' id='commenti-recensione'>
+			              <h2 class="c2">Commenti</h2>
+				          <table>
+					         <thead><tr><th class="c2">Utente</th><th class="c2">Commento</th></tr></thead>
+					           <tbody id='tabella-commenti' class="c2"></tbody>
+				          </table>
+		                </div>
+					
+					
+					
+			</div>
 			<br><br>
-			<button id="add-recensioni" class="d">Aggiungi</button>
+		<button class='recensione-add-confirm'>Conferma</button> <button class='abort'>Annulla</button><!-- Questo bottone manca -->
 		</div>
 	</div>
-
+	<div id='confirm-form' class='modal'>
+		<div id='detail-content' class='modal-content'>
+			<span id='close-detail' class='close'>&times;</span>
+			<div class='confirm-question'>
+				<span>Sicuro di voler eliminare?</span>
+				<br><br>
+				<button id='confirm'>Conferma</button> <button id='cancel'>Annulla</button>
+			</div>
+		</div>
+	</div>
+	
 	<nav>
 	<h2><a class="c" href="homepage.html">BACK</a></h2>
         <a class="c" href="news.html">News</a>
         <a class="c" href ="categorie.html">Categorie</a>
     </nav>
+    
+  <div class="page-wrap">
+  
+  
+</div>
+
+<footer class="site-footer">
+  Giada Fontana
+  Alessandro De Falco
+  Igor Fodella
+  Hind Kamouni
+  Federico Spina
+</footer>
+  
 	
 </body>
 

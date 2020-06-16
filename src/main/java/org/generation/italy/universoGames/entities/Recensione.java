@@ -13,11 +13,6 @@ public class Recensione implements IMappable {
 	private double punteggio;
 	private String recensore;
 	
-	public Recensione() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public Recensione(int id, String titoloVideogioco, String dataRecensione, String recensione, double punteggio,
 			String recensore) {
 		super();
@@ -39,6 +34,11 @@ public class Recensione implements IMappable {
 
 	public String getTitoloVideogioco() {
 		return titoloVideogioco;
+	}
+
+	public Recensione() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public void setTitoloVideogioco(String titoloVideogioco) {

@@ -14,7 +14,7 @@ $(document).ready(function(){
 		$('#titolo-news').html('<b>Titolo: </b>');
 		$('#categoria-news').html('<b>Categoria: </b>');
 		$('#contenuto-news').html('<b>Contenuto: </b>');
-		$('#datapubblicazione-news').html('<b>Data di Pubblicazione: </b>');
+		$('#dataPubblicazione-news').html('<b>Data di Pubblicazione: </b>');
 		$('#autore-news').html('<b>autore: </b>');
 		$('#my-modal').hide('slow');
 		$(this).parent().find('button').remove();
@@ -45,7 +45,7 @@ $(document).ready(function(){
 		$('input[NAME=\'titolo\']').val('');
 		$('input[NAME=\'categoria\']').val('');
 		$('input[NAME=\'contenuto\']').val('');
-		$('input[NAME=\'datapubblicazione\']').val('');
+		$('input[NAME=\'dataPubblicazione\']').val('');
 		$('input[NAME=\'autore\']').val('');
 		
 	})
@@ -79,7 +79,7 @@ $(document).ready(function(){
 			let autore = res.autore;
 			
 			
-			$('#id-news').append(id);
+			
 			$('#titolo-news').append(titolo);
 			$('#categoria-news').append(categoria);
 			$('#contenuto-news').append(contenuto);
@@ -90,70 +90,82 @@ $(document).ready(function(){
 		})
 	}
 	
-	let editMode=false;
-    let editId=-1;
+	
 	$('.news-add-confirm').click(function(){
 		const n = {
 				titolo: $('input[NAME=\'titolo\']').val(),
 				categoria: $('input[NAME=\'categoria\']').val(),
 				contenuto: $('input[NAME=\'contenuto\']').val(),
-				dataPubblicazione: $('input[NAME=\'datapubblicazione\']').val(),
-				classe: $('input[NAME=\'autore\']').val(),
+				dataPubblicazione: $('input[NAME=\'dataPubblicazione\']').val(),
+				autore: $('input[NAME=\'autore\']').val(),
 		}
 		
 		if (editMode){
 			n.id=editId;
-			editNews(n)
-			editMode = false
-			idDaModificare = -1
+			editRecensione(n);
+			
 		}  
 		else {
 			addNews(n);
 		}
-		
-		$('#titolo').val('')
-        $('#categoria').val('')
-        $('#contenuto').val('')
-        $('#dataPubblicazione').val('')
-        $('#autore').val('')
-        $('#lista-news').html('')
-         getNews()
-         $('#my-modal-add').hide('slow')
-       
+		$('input[NAME=\'titolo\']').val('');
+		$('input[NAME=\'categoria\']').val('');
+		$('input[NAME=\'contenuto\']').val('');
+		$('input[NAME=\'dataPubblicazione\']').val('');
+		$('input[NAME=\'autore\']').val('');
+	
 		
 	})
 	
-	function addNews(n){
+	function addNews(news){
 		$.ajax({
 			type: 'POST',
 			url: '/news',
-			data: JSON.stringify(n),
+			data: JSON.stringify(news),
 			contentType: "application/json",
 			dataType: 'json',
-			success: function(data) {
+			success: function(res) {
+				$('#lista-news').html('');
+				getNews();
 			}
 	    })
      }
 	
 	
-	function editNews(n){
+	function editNews(news){
 		$.ajax({
 			url: `/news`,
 			type: 'PUT',
-			data: JSON.stringify(n),
+			data: JSON.stringify(news),
 			success: function(res){
-					
+				editMode = false; //per questo e idDaModificare quardare sotto sul click .edit-student
+				idDaModificare = -1;
+				$('#lista-news').html('');
+				getNews();
+				$('#my-modal-add').hide('slow');
+				$('#titolo-news').html('<b>Titolo : </b>');
+				$('#categoria-news').html('<b>categoria: </b>');
+				$('#contenuto-news').html('<b>Contenuto: </b>');
+				$('#dataPubblicazione-news').html('<b>DataPubblicazione</b>');
+				$('#autore-news').html('<b>autore</b>');
+				
+				$('#my-modal').hide();
+				$('#close-detail').parent().find('button').remove();
+				$('#my-modal-add').hide('slow');	
 				
 			}
 		})
 	}
 
-	function deleteNews(id, rowHtml){
+	function deleteNews(id){
 		$.ajax({
 			url: `news/${id}`,
 			type: 'DELETE',
 			success: function(){
-					rowHtml.remove();
+					
+					$('#lista-news').html('');
+					getNews();
+					
 					
 				}
 			})
@@ -161,11 +173,14 @@ $(document).ready(function(){
 	
 	$('#detail-content').on('click', '.delete-news', function(){
 		const id = +$(this).attr('data-id');
-		deleteNews(id, $(this).parent().parent())
+		deleteNews(id)
+		$('#detail-content').hide('slow');
+		
 	
 	})
 	
-
+let editMode = false;
+	let idDaModificare = -1;
 
 	$('#detail-content').on('click', '.edit-news', function(){
 		let id = +$(this).attr('data-id');
@@ -179,7 +194,7 @@ $(document).ready(function(){
 			$('#autore').val(res.autore)
 			
 		})
-		$('#my-modal-add').css('display', 'block');
+		$('#my-modal-add').show('slow');
 			
 	})
 	

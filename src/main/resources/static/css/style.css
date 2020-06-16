@@ -1,5 +1,6 @@
 @charset "ISO-8859-1";
 
+
 body {
   margin: 0px;
   padding: 0px;
@@ -14,60 +15,74 @@ ul {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.a {
-  text-decoration: none;
-  font-family: 'Bungee Shade', cursive;
-  color: bisque;
-  font-size: 50px;
-}
-.b {
-	text-decoration: none;
-	font-family: 'Gugi', cursive;
-	color: bisque;
-	font-size: 20px;
+
+.title{
+	font-family: 'Wallpoet', cursive;
+	color: yellow;
+	font-size: 80px;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-.titolo {
-  font-size: 50px;
-} 
 .menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top:10px;
+  padding-bottom: 70px;
  
 }
-.login {
-  
-  padding-right: 29px;
-  padding-top: -20px;
-  text-decoration: none;
-  text-align: right;
-  margin-top: 0px;
-  margin-bottom: 10px;
-}
+
 .linea2 {
   display: flex;
-  justify-content: space-between;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 30px;
+  margin-right: 70px;
   padding-top: 20px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 30px;
+  padding-right: 70px;
   font-size: 40px;
 }
-.linea3 {
-  text-align: center;
-  font-size: 40px;
-  margin-top: 20px;
-}
+
 body {
-  background-image: url("Cattura.png");
+  background-image: url("redmario.jpg");
   background-repeat: no-repeat;
-  background-position: center;
-  height: 700px;
-  background-size: 105% 100%;
   
+  background-size: cover;
 }
+
+.font {
+	font-family: 'Orbitron', sans-serif;
+	color: yellow;
+	font-size: 30px;
+}
+
+
+.font2 {
+	font-family: 'Orbitron', sans-serif;
+	color: yellow;
+	font-size: 30px;
+}
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+	margin-bottom: -142px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  /* .push must be the same height as footer */
+     color: white;
+	height: 142px; 
+}
+.site-footer {
+  background: black;
+} 
+ 
+
+
