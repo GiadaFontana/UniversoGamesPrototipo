@@ -53,4 +53,82 @@ html, body {
 }
 .site-footer {
   background: black;
+  font-family: 'Itim', cursive;
 }
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+}
+.dialog {
+  background: #fff;
+  max-width: 500px;
+  box-shadow: 0 5px 3px -5px rgba(0,0,0,.2);
+  box-sizing: border-box;
+  padding:50px;
+  font-size:1.25rem;
+  border-radius: 5px;
+  color: #668;
+  line-height: 1.9rem;
+  position:relative;
+}
+.dialog-complete {
+	text-align:center;
+}
+.dialog-user {
+	font-weight: bold;
+	color: #333;
+	display:block;
+	margin-top:1em;
+}
+.dialog h2 {
+  font-weight: bold;
+  font-size: 1.75rem;
+  margin:0;
+  color: #335;
+}
+.dialog::before {
+  content: ' ';
+  display:block;
+  position:absolute;
+  width: 95.3px;
+  height:58.7px;
+  top: -121px;
+  left:50%;
+  transform: translateX(-50%);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5NS4zIDU4LjciPg0KICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNMCAwaDk1LjJ2NTguN0gweiIvPg0KICA8cGF0aCBmaWxsPSIjRURFREVEIiBkPSJNOTMuOSAxLjJINDcuNnY0NC4xIi8+DQogIDxwYXRoIGZpbGw9IiNGN0Y3RjciIGQ9Ik00Ny42IDEuMkgxLjNsNDYuMyA0NC4xIi8+DQogPCEtLSA8cGF0aCBmaWxsPSIjRURERkRGIiBkPSJNNDcuNiAxLjJoNDYuM3Y1Ni4zSDQ3LjZ6Ii8+DQogIDxwYXRoIGZpbGw9IiNGNEU2RTUiIGQ9Ik0xLjMgMS4yaDQ2LjN2NTYuM0gxLjN6Ii8+IC0tPg0KICA8cGF0aCBmaWxsPSIjQzRCOUI5IiBkPSJNOTQgMS4ySDQ3LjZ2NDQuMSIvPg0KICA8cGF0aCBmaWxsPSIjRTFEM0QzIiBkPSJNNDcuNiAxLjJIMS4zbDQ2LjMgNDQuMSIvPg0KICA8cGF0aCBmaWxsPSIjRkZGIiBkPSJNNDcuNiAzNy4xTDEuMyAxLjJIOTQiLz4NCjwvc3ZnPg0K");
+  
+  animation-duration: .8s;
+  animation-name: boinc;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.77,0,0.18,1);
+  animation-direction: alternate
+}
+.dialog button {
+  background: #fff;
+  border: 0;
+  padding:10px 20px;
+  display: inline-block;
+  background: #23a9d8;
+  color:#fff;
+  font-size: 1.1rem;
+  margin-top:.5em;
+  cursor: pointer;
+}
+.dialog button:hover {
+  background-color: #28C1F6;
+}
+
+@keyframes boinc {
+  0% {
+     transform: translateX(-50%) translateY(-5px);
+     animation-timing-function: ease-in;
+  }
+  100% {
+     transform: translateX(-50%) translateY(5px);
+    animation-timing-function: ease-out;
+  }
+}
+

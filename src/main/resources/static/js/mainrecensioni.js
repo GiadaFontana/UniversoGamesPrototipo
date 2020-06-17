@@ -159,7 +159,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			success: function(res){
 				
-					editMode = false; //per questo e idDaModificare quardare sotto sul click .edit-student
+					editMode = false; 
 					idDaModificare = -1;
 					$('#lista-recensioni').html('');
 					getRecensioni();

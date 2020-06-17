@@ -4,8 +4,8 @@ public class CommentoNews extends Commento {
 	
 	private int idNews;
 
-	public CommentoNews(int id, String commento, int idUtente) {
-		super(id, commento, idUtente);
+	public CommentoNews() {
+		super();
 	}
 
 	public CommentoNews(int id, String commento, int idUtente, int idNews) {

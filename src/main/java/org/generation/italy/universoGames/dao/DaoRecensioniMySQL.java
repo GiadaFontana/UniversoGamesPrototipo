@@ -75,6 +75,13 @@ public class DaoRecensioniMySQL extends BasicDao implements IDaoRecensioni {
 	}
 
 
+	@Override
+	public void deleteCommentiRecensione(int idRecensione) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 		
 	}

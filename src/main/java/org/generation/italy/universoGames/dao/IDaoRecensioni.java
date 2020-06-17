@@ -11,4 +11,5 @@ public interface IDaoRecensioni {
 	public void addRecensione(Recensione recensione);
 	public void deleteRecensione(int id);
 	public void updateRecensione(Recensione recensione);
+	public void deleteCommentiRecensione(int idRecensione);
 }

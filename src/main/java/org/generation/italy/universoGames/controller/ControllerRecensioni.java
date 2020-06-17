@@ -45,4 +45,8 @@ public class ControllerRecensioni {
 	public void updateMapping(@RequestBody Recensione recensione) {
 		dao.updateRecensione(recensione);
 	}
+	@DeleteMapping("/{idRecensione}")
+    public void deleteCommentiRecensioni(@PathVariable int idRecensione) {
+        dao.deleteCommentiRecensione(idRecensione);
+    }
 }
